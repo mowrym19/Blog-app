@@ -5,7 +5,13 @@ var express = require("express"),
 	methodOverride = require("method-override"),
 	expressSanitizer = require("express-sanitizer");
 
-mongoose.connect("mongodb://localhost/blog_app", { useNewUrlParser: true });
+//console.log(process.env.DBURL);
+
+var url = process.env.DBURL || "mongodb://localhost/blog_app";
+mongoose.connect(url, {useNewUrlParser: true});
+
+//mongodb+srv://mowrym19:<password>@cluster0-b1no8.mongodb.net/blogapp?retryWrites=true
+mongoose.connect(process.env.DBURL, { useNewUrlParser: true });
 mongoose.set('useFindAndModify', false);
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -94,7 +100,9 @@ app.delete("/blogs/:id", function(req, res){
 });
 });
 
-app.listen(3000, () => {
-	console.log('BlogApp Activated');
+//added var to ensure Heroku can find port
+var PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+	console.log('BlogApp activated');
 });
 	
