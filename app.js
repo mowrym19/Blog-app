@@ -11,7 +11,7 @@ var url = process.env.DBURL || "mongodb://localhost/blog_app";
 mongoose.connect(url, {useNewUrlParser: true});
 
 //mongodb+srv://mowrym19:<password>@cluster0-b1no8.mongodb.net/blogapp?retryWrites=true
-mongoose.connect(process.env.DBURL, { useNewUrlParser: true });
+//mongoose.connect(process.env.DBURL, { useNewUrlParser: true });
 mongoose.set('useFindAndModify', false);
 app.set("view engine", "ejs");
 app.use(express.static("public"));
